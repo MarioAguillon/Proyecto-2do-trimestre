@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Próximo Destino - Mis Viajes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100"> <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-compass-fill me-2 fs-4"></i>
+                Próximo Destino
+            </a>
+            
+            <div class="d-flex align-items-center">
+                
+                <span class="navbar-text text-white me-3 d-none d-sm-inline">
+                    Hola, ¡es hora de viajar!
+                </span>
+                <button class="btn btn-outline-light rounded-circle" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="bi bi-person-circle fs-5"></i> 
+                </button>
+                </div>
+        </div>
+    </nav>
+    <main class="container my-5 flex-grow-1"> 
+        <h1 class="mb-5 text-primary">Mi Bitácora de Viajes</h1>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" id="destinos-container">
+            
+            <div class="col">
+                <div class="card destino-card shadow-sm h-100 border-0 bg-light">
+                    <img src="images/machu.jpg" class="card-img-top card-img-custom" alt="Ruinas de Machu Picchu">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">Ruinas de Machu Picchu</h5>
+                        <p class="card-text text-muted small">Perú</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge text-bg-warning text-dark">Pendiente</span> 
+                            <span class="text-muted small"><i class="bi bi-currency-dollar"></i> 3,500 USD</span>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#addEditModal" title="Editar"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card destino-card shadow-sm h-100 border-0 bg-light">
+                    <img src="images/tailandia.jpg" class="card-img-top card-img-custom" alt="Playas de Koh Lanta">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">Playas de Koh Lanta</h5>
+                        <p class="card-text text-muted small">Tailandia</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge text-bg-success text-white">Visitado</span> 
+                            <span class="text-muted small"><i class="bi bi-currency-dollar"></i> 1,800 USD</span>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                             <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#addEditModal" title="Editar"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card destino-card shadow-sm h-100 border-0 bg-light">
+                    <img src="images/piramide.jpg" class="card-img-top card-img-custom" alt="Pirámides de Egipto">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">Pirámides de Egipto</h5>
+                        <p class="card-text text-muted small">Egipto</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge text-bg-warning text-dark">Pendiente</span> 
+                            <span class="text-muted small"><i class="bi bi-currency-dollar"></i> 5,000 USD</span>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#addEditModal" title="Editar"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card destino-card shadow-sm h-100 border-0 bg-light">
+                    <img src="images/santorini.jpg" class="card-img-top card-img-custom" alt="Pueblo de Santorini, Grecia">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">Atardecer en Santorini</h5>
+                        <p class="card-text text-muted small">Grecia</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge text-bg-success text-white">Visitado</span> 
+                            <span class="text-muted small"><i class="bi bi-currency-dollar"></i> 2,200 USD</span>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#addEditModal" title="Editar"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card destino-card shadow-sm h-100 border-0 bg-light">
+                    <img src="images/paris.jpg" class="card-img-top card-img-custom" alt="Torre Eiffel en París">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">Torre Eiffel, París</h5>
+                        <p class="card-text text-muted small">Francia</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge text-bg-warning text-dark">Pendiente</span> 
+                            <span class="text-muted small"><i class="bi bi-currency-dollar"></i> 3,000 USD</span>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#addEditModal" title="Editar"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card destino-card shadow-sm h-100 border-0 bg-light">
+                    <img src="images/alaska.jpg" class="card-img-top card-img-custom" alt="Aurora boreal en Alaska">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">Aurora Boreal, Alaska</h5>
+                        <p class="card-text text-muted small">EE. UU.</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge text-bg-warning text-dark">Pendiente</span> 
+                            <span class="text-muted small"><i class="bi bi-currency-dollar"></i> 4,500 USD</span>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#addEditModal" title="Editar"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card destino-card shadow-sm h-100 border-0 bg-light">
+                    <img src="images/tokyo.jpg" class="card-img-top card-img-custom" alt="Skyline de Tokyo">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">Skyline de Tokyo</h5>
+                        <p class="card-text text-muted small">Japón</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge text-bg-success text-white">Visitado</span> 
+                            <span class="text-muted small"><i class="bi bi-currency-dollar"></i> 3,800 USD</span>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#addEditModal" title="Editar"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card destino-card shadow-sm h-100 border-0 bg-light text-center p-4 d-flex align-items-center justify-content-center">
+                    <i class="bi bi-pin-map-fill text-muted fs-1 mb-3"></i>
+                    <h5 class="card-title text-primary fw-bold">Agrega un nuevo destino</h5>
+                    <p class="card-text text-muted small">¡Tu próximo viaje espera ser planeado!</p>
+                    <button class="btn btn-primary btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#addEditModal">
+                        <i class="bi bi-plus-lg"></i> Agregar
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <button class="btn floating-btn" data-bs-toggle="modal" data-bs-target="#addEditModal" title="Agregar Nuevo Destino">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+    
+    <footer class="bg-primary text-white py-3 mt-auto">
+        <div class="container d-flex justify-content-between align-items-center">
+            <p class="mb-0">2025 Todos los derechos reservados | Proyecto Educativo con Bootstrap</p>
+            <a href="terms.html" class="text-white text-decoration-underline small">Términos y Políticas</a>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="addEditModal" tabindex="-1" aria-labelledby="addEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="addEditModalLabel">Agregar/Editar Destino</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="tituloViaje" class="form-label">Título del viaje</label>
+                            <input type="text" class="form-control" id="tituloViaje" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="paisCiudad" class="form-label">País/Ciudad</label>
+                            <input type="text" class="form-control" id="paisCiudad" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción (Notas)</label>
+                            <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="fechaPlaneada" class="form-label">Fecha Planeada</label>
+                                <input type="date" class="form-control" id="fechaPlaneada">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="presupuesto" class="form-label">Presupuesto Estimado ($)</label>
+                                <input type="number" class="form-control" id="presupuesto" min="0">
+                            </div>
+                        </div>
+                        <div class="form-check form-switch mb-4">
+                            <input class="form-check-input bg-success" type="checkbox" role="switch" id="visitadoSwitch">
+                            <label class="form-check-label" for="visitadoSwitch">¿Ya visité este lugar?</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Guardar Destino</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="settingsModalLabel">Ajustes de Usuario</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="text-primary">Información de la Cuenta</h6>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">Usuario: JuanPZ</li>
+                        <li class="list-group-item">Email: jperez@correo.com</li>
+                    </ul>
+                    <button class="btn btn-outline-primary w-100 mb-2">Cambiar Contraseña</button>
+                    <button class="btn btn-danger w-100 mt-3" onclick="location.href='index.html';">Cerrar Sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="dashboard.js"></script> 
+</body>
+</html>

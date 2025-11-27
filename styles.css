@@ -1,0 +1,207 @@
+/* ----------------------------------------------------------------- */
+/* styles.css: Paleta de Colores y Estilos Personalizados */
+/* ----------------------------------------------------------------- */
+
+:root {
+    /* 1. Definición de la Paleta de Colores de Bootstrap */
+    
+    /* Azul Marino Profundo (Tono Petróleo - Color principal en botones y texto) */
+    --bs-primary: #1A237E;
+    
+    /* NUEVA VARIABLE: Tono más oscuro para Header/Footer */
+    --bs-darker-primary: #0D1244;
+    
+    /* Amarillo Ocre Brillante (Acento) */
+    --bs-warning: #FFB300;      
+    
+    /* Verde Esmeralda (Éxito / Visitado) */
+    --bs-success: #00897B;      
+
+    /* Gris Claro (Fondo de Tarjetas / Modales) */
+    --bs-light: #EEEEEE; 
+
+    /* Color de texto en fondos claros */
+    --bs-dark: #1A237E; 
+
+    /* Color del Body (para que no sea blanco puro) */
+    --bs-body-bg: #F8F9FA;
+}
+
+
+/* ----------------------------------------------------------------- */
+/* 0. SOLUCIÓN: FOOTER SIEMPRE ABAJO (Sticky Footer) */
+/* ----------------------------------------------------------------- */
+
+html, body {
+    height: 100%; /* Asegura que el HTML y el Body ocupen toda la altura de la ventana */
+    margin: 0;
+}
+
+body {
+    display: flex; /* Convierte el body en un contenedor flex */
+    flex-direction: column; /* Apila los hijos (Header, Main, Footer) verticalmente */
+}
+
+/* El elemento <main> debe ocupar el espacio restante, empujando el footer */
+main {
+    flex-grow: 1; 
+}
+
+/* ----------------------------------------------------------------- */
+/* 1. PALETA Y COLORES OSCUROS (Header y Footer) */
+/* ----------------------------------------------------------------- */
+
+/* Aplicar el color más oscuro al Header (Navbar) */
+.navbar.bg-primary {
+    background-color: var(--bs-darker-primary) !important;
+}
+
+/* Aplicar el color más oscuro al Footer */
+footer.bg-primary {
+    background-color: var(--bs-darker-primary) !important;
+}
+
+/* Reafirmar la paleta de colores para las utilidades de Bootstrap */
+.bg-primary {
+    background-color: var(--bs-primary) !important;
+}
+
+.btn-primary {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+}
+
+/* Estilo de los Modales (para que el texto del link sea azul petróleo) */
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+/* ----------------------------------------------------------------- */
+/* 2. ESTILOS DE LA LANDING PAGE (Carrusel) */
+/* ----------------------------------------------------------------- */
+
+.carousel-item {
+    /* CORREGIDO: Usamos 85vh para ocupar más espacio y eliminar el hueco */
+    height: 85vh; 
+    background-size: cover;
+    background-position: center;
+}
+
+/* Definición de las imágenes de fondo del carrusel - RUTAS CONFIRMADAS */
+.hero-item-1 {
+    background-image: url('images/africa.jpg');
+}
+.hero-item-2 {
+    background-image: url('images/montañas.jpg');
+}
+.hero-item-3 {
+    background-image: url('images/playa.jpg');
+}
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.3);
+    height: 100%; 
+}
+
+.text-shadow-lg {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Estilo del Botón de Acento (Amarillo Ocre) */
+.btn-accent {
+    background-color: var(--bs-warning); 
+    color: var(--bs-primary); /* Texto en Azul Marino Profundo */
+    border: none;
+    font-weight: bold;
+    padding: 10px 30px;
+    font-size: 1.2rem;
+}
+
+/* ----------------------------------------------------------------- */
+/* 3. ESTILOS DEL DASHBOARD (Efecto Flotante) */
+/* ----------------------------------------------------------------- */
+
+/* Estilo para el botón flotante */
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1020; 
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bs-warning) !important; 
+    border-color: var(--bs-warning) !important;
+    color: var(--bs-primary) !important; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+}
+.floating-btn:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+/* Estilo para las Tarjetas de Destino (Hover Flotante) */
+.destino-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.destino-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+    cursor: pointer;
+}
+
+/* Ajuste de imágenes en la tarjeta */
+.card-img-custom {
+    height: 180px;
+    object-fit: cover;
+}
+
+/* ----------------------------------------------------------------- */
+/* 4. ESTILOS DE LA PÁGINA DE TÉRMINOS */
+/* ----------------------------------------------------------------- */
+
+.terms-page-bg {
+    /* Usamos 'aeropuerto.jpg' según tu último código */
+    background-image: url('images/aeropuerto.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+    color: #f8f9fa; 
+}
+
+/* Contenedor principal de los términos con overlay para legibilidad */
+.terms-page-bg main {
+    background-color: rgba(0, 0, 0, 0.6); 
+    padding: 3rem 0; 
+    border-radius: 8px; 
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.terms-page-bg .card {
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: #f8f9fa;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.terms-page-bg h1, .terms-page-bg h3, .terms-page-bg .lead {
+    color: #ffffff !important; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
+}
+
+/* Estilo del botón de regreso (usando color de acento) */
+.terms-page-bg .btn-primary {
+    background-color: var(--bs-warning) !important; 
+    border-color: var(--bs-warning) !important;
+    color: var(--bs-darker-primary) !important; 
+}
