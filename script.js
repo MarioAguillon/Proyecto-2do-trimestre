@@ -1,101 +1,135 @@
-// script.js
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // 1. Obtener referencias a los formularios
+    const loginForm = document.querySelector('#loginModal form');
+    const registerForm = document.querySelector('#registerModal form');
+    const recoverForm = document.querySelector('#recoverModal form');
 
-// Espera a que todo el contenido del DOM (incluyendo Bootstrap) esté cargado
-document.addEventListener('DOMContentLoaded', () => {
+    // Clave para almacenar los usuarios en Local Storage
+    const USERS_KEY = 'users';
 
-    // 1. Obtener las referencias a los elementos DOM de los modales
-    const loginModalElement = document.getElementById('loginModal');
-    const registerModalElement = document.getElementById('registerModal');
-    const recoverModalElement = document.getElementById('recoverModal');
-
-    // Verificar si los elementos existen (para evitar errores si no se encuentran)
-    if (!loginModalElement || !registerModalElement || !recoverModalElement) {
-        console.error("No se encontraron todos los elementos modales. Verifica los IDs en index.html.");
-        return; 
-    }
-
-    // 2. Crear instancias de los objetos Modal de Bootstrap para su control
-    const loginModal = new bootstrap.Modal(loginModalElement);
-    const registerModal = new bootstrap.Modal(registerModalElement);
-    const recoverModal = new bootstrap.Modal(recoverModalElement);
-
-    // -----------------------------------------------------------
-    // 3. Lógica para CONMUTAR (cambiar) entre modales
-    // -----------------------------------------------------------
-
-    // Función genérica para cambiar un modal (ocultar) por otro (mostrar)
-    const switchModal = (modalToHide, modalToShow) => {
-        modalToHide.hide();
-        // Usamos un pequeño delay para que la animación de cierre del primer modal sea visible
-        setTimeout(() => {
-            modalToShow.show();
-        }, 150); 
+    // Función para obtener todos los usuarios del Local Storage
+    const getUsers = () => {
+        const storedUsers = localStorage.getItem(USERS_KEY);
+        // Devuelve el array de usuarios o un array vacío si no existe
+        return storedUsers ? JSON.parse(storedUsers) : [];
     };
 
+    // Función para guardar el array de usuarios en Local Storage
+    const saveUsers = (users) => {
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    };
 
-    // A. De Login a Registro
-    const registerLinkInLogin = loginModalElement.querySelector('a[data-bs-target="#registerModal"]');
-    if (registerLinkInLogin) {
-        registerLinkInLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            switchModal(loginModal, registerModal);
-        });
-    }
-
-    // B. De Registro a Login
-    const loginLinkInRegister = registerModalElement.querySelector('a[data-bs-target="#loginModal"]');
-    if (loginLinkInRegister) {
-        loginLinkInRegister.addEventListener('click', (e) => {
-            e.preventDefault();
-            switchModal(registerModal, loginModal);
-        });
-    }
-
-    // C. De Login a Recuperar Contraseña
-    const recoverLinkInLogin = loginModalElement.querySelector('a[data-bs-target="#recoverModal"]');
-    if (recoverLinkInLogin) {
-        recoverLinkInLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            switchModal(loginModal, recoverModal);
-        });
-    }
-
-    // -----------------------------------------------------------
-    // 4. Lógica para Simular Autenticación y Redirección
-    // -----------------------------------------------------------
-
-    // Función que maneja el envío del formulario de autenticación
-    const handleAuthSubmit = (event, modal) => {
-        event.preventDefault();
+    // Función genérica para manejar el envío de formularios de simulación
+    function handleGenericSubmission(event, formName) {
+        event.preventDefault(); 
         
-        // **NOTA IMPORTANTE:** Aquí es donde iría la lógica de validación,
-        // cifrado de contraseña y guardado de datos en JSON/Local Storage (futuro).
-        console.log(`Simulando proceso de autenticación/registro exitoso desde ${modal.element.id}...`);
-
-        // Oculta el modal y redirige al dashboard (simulación de éxito)
-        modal.hide();
-        window.location.href = 'dashboard.html';
-    };
-
-    // Aplicar la lógica a los formularios
-    const loginForm = loginModalElement.querySelector('form');
-    if (loginForm) {
-        loginForm.addEventListener('submit', (e) => handleAuthSubmit(e, loginModal));
+        console.log(`Formulario de "${formName}" enviado. (Simulación)`);
+        
+        const modalElement = event.target.closest('.modal');
+        if (modalElement) {
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            if (modal) {
+                modal.hide();
+            }
+        }
+        
+        alert(`¡Éxito! Formulario de ${formName} procesado de forma simulada.`);
+        event.target.reset();
     }
 
-    const registerForm = registerModalElement.querySelector('form');
+    // -----------------------------------------------------------------
+    // LÓGICA DE REGISTRO: CREA Y GUARDA UN NUEVO USUARIO EN LOCAL STORAGE
+    // -----------------------------------------------------------------
     if (registerForm) {
-        registerForm.addEventListener('submit', (e) => handleAuthSubmit(e, registerModal));
+        registerForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Obtenemos los valores ingresados por el usuario
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validación de Contraseñas
+            if (password !== confirmPassword) {
+                alert('Error: Las contraseñas no coinciden.');
+                return;
+            }
+
+            let users = getUsers();
+
+            // Validación de Email (simple): verifica si el email ya existe
+            if (users.some(user => user.email === email)) {
+                alert('Error: Ya existe un usuario registrado con ese email.');
+                return;
+            }
+
+            // Crear y guardar el nuevo usuario
+            const newUser = { name, email, password };
+            users.push(newUser);
+            saveUsers(users); // <-- ¡Guardado en Local Storage!
+
+            // Cierra el modal de Registro y avisa
+            const modalElement = event.target.closest('#registerModal');
+            if (modalElement) {
+                bootstrap.Modal.getInstance(modalElement).hide();
+            }
+            
+            alert(`¡Registro exitoso, ${name}! Ahora puedes iniciar sesión.`);
+            event.target.reset();
+        });
     }
 
-    // El formulario de recuperación de contraseña no requiere redirección aquí
-    // simplemente se enviaría la solicitud de email (lógica de backend)
-    const recoverForm = recoverModalElement.querySelector('form');
-    if (recoverForm) {
-        recoverForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert("Enlace de recuperación enviado (simulación).");
-            recoverModal.hide();
+    // -----------------------------------------------------------------
+    // LÓGICA DE INICIAR SESIÓN: VALIDA CONTRA LOS DATOS GUARDADOS
+    // -----------------------------------------------------------------
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            
+            // Obtenemos los valores de login
+            const userOrEmail = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const users = getUsers(); // Obtenemos todos los usuarios guardados
+
+            // Buscamos un usuario que coincida: 
+            // 1. Coincidencia por email O por nombre de usuario
+            // 2. Y la contraseña debe coincidir
+            const userFound = users.find(user => 
+                (user.email === userOrEmail || user.name === userOrEmail) && user.password === password
+            );
+
+            if (userFound) {
+                // Autenticación Exitosa
+                localStorage.setItem('isAuthenticated', 'true'); // <-- Establece la bandera de acceso
+                alert(`¡Bienvenido, ${userFound.name}! Redirigiendo al dashboard.`);
+                window.location.href = 'dashboard.html'; // <-- Redirección al dashboard
+            } else {
+                // Autenticación Fallida
+                alert('Error: Usuario, email o contraseña incorrectos.');
+                localStorage.removeItem('isAuthenticated'); 
+            }
         });
+    }
+
+    // -----------------------------------------------------------------
+    // LÓGICA DE RECUPERACIÓN (Mantiene la Simulación)
+    // -----------------------------------------------------------------
+
+    // Formulario de Recuperar Contraseña
+    if (recoverForm) {
+        recoverForm.addEventListener('submit', function(event) {
+            handleGenericSubmission(event, 'Recuperación de Contraseña');
+        });
+    }
+    
+    // Ejemplo de un Evento de Modal de Bootstrap
+    const loginModalElement = document.getElementById('loginModal');
+    if (loginModalElement) {
+        loginModalElement.addEventListener('shown.bs.modal', function () {
+            console.log('El modal de Iniciar Sesión se ha abierto completamente.');
+        })
     }
 });
